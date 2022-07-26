@@ -22,3 +22,9 @@ $('#apprenantTable').DataTable({
 et de mettre le fichier *fr-FR.json* dans le sous-répertoire *french* dans *static*. 
 
 Lien vers la documentation de la DataTable : [https://datatables.net/plug-ins/i18n/](https://datatables.net/plug-ins/i18n/)
+
+Logiquement, la table est automatiquement mise à jour grâce l'instruction :
+
+```javascript
+table.ajax.reload();
+```
