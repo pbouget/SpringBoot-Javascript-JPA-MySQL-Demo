@@ -16,7 +16,7 @@
 }
 
 #header .logo img {
-	display: block;
-	width: 3em;
-	height: 2em;
+	display: inline-block;
+	width: 4em;
+	height: 4em;
 }
