@@ -59,6 +59,9 @@ $(document).ready(function() {
  */
 function loadDatatable() {
 	$('#apprenantTable').DataTable({
+	    "language": {
+            url: 'french/fr-FR.json'
+        },
 		"columnDefs": [
 	            {
 	                "targets": [ 0 ],
