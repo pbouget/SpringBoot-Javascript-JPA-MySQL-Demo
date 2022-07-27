@@ -20,7 +20,7 @@ $(document).ready(function() {
 	
 	// si vous cliquez sur le bouton click "btn-post"
 	// on appelle la méthode "apprenant_submit()
-	// en lui passant 2 paramètres : la référence du bouton pour le désactiver et le type de méthode, ici POST.
+	// en lui passant 2 paramètres : la référence du bouton pour le désactiver et la type de méthode, ici POST.
 	$("#btn-post").click(function() {
 		apprenant_submit($("#btn-post"), "POST", table);
 	
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 	// si vous cliquez sur le bouton click "btn-put"
 	// on appelle la méthode "apprenant_submit()
-	// en lui passant 2 paramètres : la référence du bouton pour le désactiver et le type de méthode, ici PUT.
+	// en lui passant 2 paramètres : la référence du bouton pour le désactiver et la type de méthode, ici PUT.
 	$("#btn-put").click(function() {
 		apprenant_submit($("#btn-put"), "PUT", table);
 	
@@ -54,14 +54,11 @@ $(document).ready(function() {
 });
 
 /**
- * Charge les données dans la DataTable
+ * Charge les données dans la DataTable (JQuery)
  * @returns
  */
 function loadDatatable() {
 	$('#apprenantTable').DataTable({
-	    "language": {
-            url: 'french/fr-FR.json'
-        },
 		"columnDefs": [
 	            {
 	                "targets": [ 0 ],
@@ -117,7 +114,7 @@ function apprenant_submit(button, httpVerb, table) {
 		data : JSON.stringify(apprenant),		// on transforme les données de la variable Javascript "apprenant" en format JSON
 		dataType : 'json',						// on précise le mode de transfert
 		cache : false,							// pas de cache sollicité
-		timeout : 3000,							// délai d'attente
+		timeout : 600000,						// délai d'attente
 		success : function(data) {				// si ok
 
 			var json = "<h3>Réponse du serveur au format JSON</h3><pre>Apprenant (modifié/ajouté) :<br>" + JSON.stringify(data, null, 4) + "</pre>";
@@ -127,8 +124,7 @@ function apprenant_submit(button, httpVerb, table) {
 			console.log("SUCCESS : ", data);
 			button.prop("disabled", false);
 
-			resetForm();
-			table.ajax.reload();
+			resetForm()
 		},
 		error : function(e) {
 
@@ -141,8 +137,8 @@ function apprenant_submit(button, httpVerb, table) {
 
 		}
 	});
-	
-	//table.ajax.reload(); // on recharge les données via ajax et la méthode reload()
+	// table.destroy();
+	table.reload(); // on recharge les données via ajax et la méthode reload()
 }
 
 function resetForm() {
@@ -168,7 +164,7 @@ function getApprenant() {
 		data : {},
 		dataType : 'json',
 		cache : false,
-		timeout : 3000,
+		timeout : 600000,
 		success : function(data) {
 
 			var json = "<h3>Réponse serveur au format JSON</h3><pre>Apprenant trouvé :<br>" + JSON.stringify(data, null, 4) + "</pre>";
@@ -191,7 +187,7 @@ function getApprenant() {
 }
 
 /**
- * méthode pour supprimer un.e apprenant.e
+ * méthode pour supprimer un apprenant
  * @returns
  */
 function deleteApprenant() {
@@ -205,7 +201,7 @@ function deleteApprenant() {
 		//data : {},
 		//dataType : 'json',
 		cache : false,
-		timeout : 3000,
+		timeout : 600000,
 		success : function(data) {
 
 			var json = "<h3>Réponse du serveur :</h3><pre>Apprenant " + idApprenant + " effacé.</pre>";
@@ -213,7 +209,6 @@ function deleteApprenant() {
 			console.log("SUCCESS : ", data);
 
 			resetForm();
-			table.ajax.reload();
 		},
 		error : function(e) {
 			var json = "<h3>Server Response</h3><pre>" + e.responseText	+ "</pre>";
@@ -222,5 +217,5 @@ function deleteApprenant() {
 			console.log("ERROR : ", e);
 		}
 	});
-	//table.ajax.reload();
+	table.reload();
 }
